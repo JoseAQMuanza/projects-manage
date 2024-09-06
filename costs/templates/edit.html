@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">    
+    <div class="d-flex justify-content-between pt-3 px-3 border-bottom border-dark">
+      <div>
+        <h5 class="card-title bg-black p-3 mb-4 card-h5-project">{{project.name}}</h5>    
+        <p><span class="fw-bold">Categorie:</span> {{project.categories}}</p>
+        <p><span class="fw-bold">budget Total:</span> {{project.budget}}</p>
+        <p><span class="fw-bold">Total Used:</span> 0kz</p>
+      </div>   
+          
+      <div class="mt-4 pb-4 border-bottom border-dark">
+        <div class="d-flex justify-content-between">          
+          <p class="d-inline-flex gap-1">
+            <a class="btn btn-dark" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+              Atualize Project
+            </a>
+          </p>
+        </div>                    
+      </div>
+    </div>
+    <br>
+    <div class="collapse" id="collapseExample1">
+      <form class="form-control" action="edit" method="POST">          
+        {% csrf_token %}                
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label fw-bold">Project Name:</label>
+          <input 
+           type="text" class="form-control" 
+           id="exampleFormControlInput1" 
+           name="name"
+           placeholder="Insert the project name"
+           value={{project.name}}>
+      </div>
+      <div class="mb-3">                
+          <label for="exampleFormControlInput2" class="form-label fw-bold">Project Budget:</label>
+          <input 
+           type="number" 
+           class="form-control" 
+           id="exampleFormControlInput2" 
+           name="budget"                 
+           placeholder="Insert the total budget">
+      </div>
+      <div class="mb-3">
+          <label for="categories" class="form-label fw-bold">Select Categories:</label>
+          <select class="form-select" aria-label="Default select example" name="categories" id="categories">
+              <option selected>{{project.categories}}</option>
+              <option value="Infra">Infra</option>
+              <option value="Development">Development</option>
+              <option value="Design">Design</option>
+              <option value="Planning">Planning</option>
+          </select>
+      </div>
+      <div class="mb-3">
+          <button type="submit" id="test" class="create-project-button">Create Project</button>
+      </div>        
+      </form>
+    </div> 
+
+    {% if messages %}
+    <div id="message-container">
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="d-flex flex-wrap">
+      {% for project in projects %}
+        <div class="card m-3 card-projects" style="width: 16rem;">
+          <div class="card-body">
+            <h5 class="card-title bg-black p-3 mb-4 card-h5-project">{{project.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              <span class="fw-bold">Budget:</span> {{project.budget}} kwanzas
+            </h6>
+            <p class="card-text text-secondary">{{project.categories}}</p>
+          </div>
+        </div>
+      {% endfor %}             
+    </div>
+
+    <div class="mt-4 pb-4 border-bottom border-dark">
+      <div class="d-flex justify-content-between">
+        <h1 class="fw-bold fs-2">Add a Service:</h1>
+        <p class="d-inline-flex gap-1">
+          <a class="btn btn-dark" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Add Service
+          </a>
+        </p>
+      </div>            
+      <div class="collapse" id="collapseExample">
+        <form class="form-control" action="" method="POST">          
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label fw-bold">Name of Service:</label>
+            <input
+             name="servicename"
+             type="input" 
+             class="form-control" 
+             id="exampleFormControlInput1" 
+             value="{{name}}"
+             placeholder="Insert the name of service">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label fw-bold">Service Cost:</label>
+            <input
+             name="servicecost"
+             type="number" 
+             class="form-control" 
+             id="exampleFormControlInput1" 
+             value="{{cost}}"
+             placeholder="Insert the total cost">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label fw-bold">Description of service:</label>
+            <input
+             name="servicedescription"
+             type="text" 
+             class="form-control" 
+             id="exampleFormControlInput1" 
+             placeholder="describe the service">
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-dark" type="submite">Add Service</button>            
+          </div>
+        </form>
+      </div> 
+    </div>
+    
+
+    <div>      
+      <h1 class="fw-bold fs-2">Services:</h1>   
+      <div class="d-flex flex-wrap">
+        {% if services %}
+        {% for service in services %}
+          <div class="card m-3 card-projects" style="width: 15rem;">
+            <div class="card-body">
+              <h5 class="card-title bg-black p-3 mb-4 card-h5-project">{{service.name}}</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">
+                <span class="fw-bold">Total Cost:</span> {{service.cost}} kwanzas
+              </h6>
+              <p class="card-text text-secondary">{{service.description}}</p>
+              <div>                
+                <a href="service/{{service.id}}" class="a-creat-projects text-danger">Delete</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}   
+        {% else %}
+        <p>With No Services yet</p>
+      {% endif %} 
+    </div>
+  </div>  
+{% endblock content %}

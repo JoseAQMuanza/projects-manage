@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% if messages %}        
+        <div class="message-container">
+            {% for message in messages %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form action="{% url 'projects' %}" method="POST">
+        <div class="container mt-1">        
+            <h1>Create Project</h1>
+            <p class="text-secondary">Create your project to add the services later</p>
+            {% csrf_token %}        
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label fw-bold">Project Name:</label>
+                <input 
+                 type="text" class="form-control" 
+                 id="exampleFormControlInput1" 
+                 name="name"
+                 placeholder="Insert the project name"
+                 value={{name}}>
+            </div>
+            <div class="mb-3">                
+                <label for="exampleFormControlInput2" class="form-label fw-bold">Project Budget:</label>
+                <input 
+                 type="number" 
+                 class="form-control" 
+                 id="exampleFormControlInput2" 
+                 name="budget"                 
+                 placeholder="Insert the total budget"
+                 value={{budget}}>
+            </div>
+            <div class="mb-3">
+                <label for="categories" class="form-label fw-bold">Select Categories:</label>
+                <select class="form-select" aria-label="Default select example" name="categories" id="categories">
+                    <option selected>Select one option</option>
+                    <option value="Infra">Infra</option>
+                    <option value="Development">Development</option>
+                    <option value="Design">Design</option>
+                    <option value="Planning">Planning</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <button type="submit" id="test" class="create-project-button">Create Project</button>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

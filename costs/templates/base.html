@@ -1,0 +1,57 @@
+<!-- Django Imports -->
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/globals.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/button.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/projects.css' %}"> 
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon-16x16.png'%}">   
+
+    <title>Costs</title>
+  </head>
+  <body>        
+      <header class="d-flex justify-content-center">
+        <a href="{% url 'home' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <img src="{% static 'images/ms-icon-144x144.png'%}" alt="costs" class="bi me-2" width="50" height="52">        
+        </a>
+
+        <ul class="nav nav-pills">
+          <li class="nav-item"><a href="{% url 'home' %}" class="nav-link text-light" aria-current="page">Home</a></li>        
+          <li class="nav-item"><a href="{% url 'projects' %}" class="nav-link text-light">Projects</a></li>
+          <li class="nav-item"><a href="{% url 'enterprise' %}" class="nav-link text-light">Enterprise</a></li>
+          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link text-light">Contact</a></li>
+        </ul>
+      </header>     
+      
+      {% block content %}
+
+      {% endblock content%}
+
+
+      <div>
+        <footer class="py-3 my-4">
+          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+          </ul>
+          <p class="text-center text-body-secondary">© 2024 Company, Inc</p>
+        </footer>
+      </div>
+  </body>
+  <script src="{% static 'js/projects.js' %}"></script>
+  <script src="{% static 'js/create.js' %}"></script>
+</html>

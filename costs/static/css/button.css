@@ -1,0 +1,10 @@
+.create-project-button{  
+  color: white;
+  background-color: black;
+  border: none;
+  padding: .3rem .7rem;
+}
+.create-project-button:hover{    
+  color: rgb(249, 180, 5);
+}
+

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+  <div> 
+    
+    <div class="d-flex justify-content-between pt-3 px-3">
+      <h1 class="fw-bold text-black"> My Projects</h1>      
+      <div>  
+        <a href="{% url 'createproject' %}"> <button type="submite" class="create-project-button" >Create Project</button> </a>
+      </div>
+    </div>
+
+    {% if messages %}
+    <div id="message-container">
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="d-flex flex-wrap">
+      {% for project in projects %}
+        <div class="card m-3 card-projects" style="width: 16rem;">
+          <div class="card-body">
+            <h5 class="card-title bg-black p-3 mb-4 card-h5-project">{{project.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              <span class="fw-bold">Budget:</span> {{project.budget}} kwanzas
+            </h6>
+            <p class="card-text text-secondary">{{project.categories}}</p>
+            <div>
+              <a href="/costs/project/{{ project.id_project }}" class="a-creat-projects text-primary">Edit</a>
+              <a href="/costs/project/delete/{{ project.id_project }}" class="a-creat-projects text-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}             
+    </div>
+  </div>
+{% endblock content %}
+
+
